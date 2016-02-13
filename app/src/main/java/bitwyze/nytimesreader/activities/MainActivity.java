@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import bitwyze.nytimesreader.Article;
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ArticleActivity.class);
 
                 Article article = articles.get(position);
-                intent.putExtra("url",article.getWebUrl());
+                intent.putExtra("article", article);
                 startActivity(intent);
             }
         });

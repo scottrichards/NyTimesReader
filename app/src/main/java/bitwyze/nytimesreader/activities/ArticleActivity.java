@@ -14,7 +14,7 @@ import java.io.Serializable;
 import bitwyze.nytimesreader.Article;
 import bitwyze.nytimesreader.R;
 
-public class ArticleActivity extends AppCompatActivity implements Serializable {
+public class ArticleActivity extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +23,8 @@ public class ArticleActivity extends AppCompatActivity implements Serializable {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-   //     Article article = (Article)getIntent().getSerializableExtra("article");
-        String url = getIntent().getStringExtra("url");
+        Article article = (Article)getIntent().getSerializableExtra("article");
         WebView webView = (WebView)findViewById(R.id.webView);
-      //  webView.loadUrl(url);
 
         webView.setWebViewClient(new WebViewClient() {
             @Override
@@ -35,8 +33,7 @@ public class ArticleActivity extends AppCompatActivity implements Serializable {
                 return true;
             }
         });
-//       webView.loadUrl(article.getWebUrl());
-        webView.loadUrl(url);
+       webView.loadUrl(article.getWebUrl());
     }
 
 }

@@ -39,6 +39,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/gridView"
         android:layout_below="@+id/searchButton"
+        android:numColumns="3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 </RelativeLayout>
