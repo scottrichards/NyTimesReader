@@ -23,18 +23,20 @@ public class ArticleActivity extends AppCompatActivity implements Serializable {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-      //  Article article = getIntent().getSerializableExtra("article");
+   //     Article article = (Article)getIntent().getSerializableExtra("article");
         String url = getIntent().getStringExtra("url");
         WebView webView = (WebView)findViewById(R.id.webView);
+      //  webView.loadUrl(url);
+
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+//       webView.loadUrl(article.getWebUrl());
         webView.loadUrl(url);
-
-//        webView.setWebViewClient(new WebViewClient() {
-//            @Override
-//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                return super.shouldOverrideUrlLoading(view, url);
-//            }
-//        });
-
     }
 
 }
