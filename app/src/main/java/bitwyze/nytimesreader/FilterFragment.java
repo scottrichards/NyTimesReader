@@ -13,7 +13,7 @@ import android.widget.Spinner;
 /**
  * Created by srichard on 2/13/16.
  */
-public class FilterFragment extends DialogFragment {
+public class FilterFragment extends DialogFragment implements AdapterView.OnItemSelectedListener {
     private String selectedCategory = "All";
     private ArrayAdapter categoryAdapter;
     private Spinner categorySpinner;
@@ -47,6 +47,7 @@ public class FilterFragment extends DialogFragment {
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner = (Spinner)view.findViewById(R.id.category_spinner);
         categorySpinner.setAdapter(categoryAdapter);
+        categorySpinner.setOnItemSelectedListener(this);
 //        categorySpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -55,6 +56,15 @@ public class FilterFragment extends DialogFragment {
 //        });
 
         return view;
+    }
+
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        selectedCategory =  parent.getItemAtPosition(pos).toString();
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
     }
 
 //    public void onOk(View view) {
