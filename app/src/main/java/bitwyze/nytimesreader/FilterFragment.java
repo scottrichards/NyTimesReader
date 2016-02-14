@@ -18,9 +18,9 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
     private ArrayAdapter categoryAdapter;
     private Spinner categorySpinner;
 
-//    public interface FilterDialogListener {
-//        void onFinishFilterDialog(String inputText);
-//    }
+    public interface FilterDialogListener {
+        void onFinishFilterDialog(String inputText);
+    }
 
     public  FilterFragment() {
 
@@ -48,12 +48,15 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
         categorySpinner = (Spinner)view.findViewById(R.id.category_spinner);
         categorySpinner.setAdapter(categoryAdapter);
         categorySpinner.setOnItemSelectedListener(this);
-//        categorySpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                selectedCategory = parent.getItemAtPosition(position).toString();
-//            }
-//        });
+        Button onOkBtn = (Button)view.findViewById(R.id.filterOK);
+        onOkBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FilterDialogListener activity = (FilterDialogListener) getActivity();
+                activity.onFinishFilterDialog(selectedCategory);
+                dismiss();
+            }
+        });
 
         return view;
     }
@@ -67,10 +70,7 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
         // Another interface callback
     }
 
-//    public void onOk(View view) {
-//        FilterDialogListener activity = (FilterDialogListener) getActivity();
-//        activity.onFinishFilterDialog(selectedCategory);
-//    }
+
 
 
 }

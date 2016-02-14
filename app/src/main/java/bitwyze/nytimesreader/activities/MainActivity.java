@@ -34,7 +34,7 @@ import bitwyze.nytimesreader.FilterFragment;
 import bitwyze.nytimesreader.R;
 import cz.msebera.android.httpclient.Header;
 
-public class MainActivity extends AppCompatActivity /* implements FilterFragment.FilterDialogListener */ {
+public class MainActivity extends AppCompatActivity  implements FilterFragment.FilterDialogListener  {
     Button btnSearch;
     EditText etQuery;
     GridView gvResults;
@@ -128,8 +128,8 @@ public class MainActivity extends AppCompatActivity /* implements FilterFragment
         );
     }
 
-//    @Override
-//    public void onFinishFilterDialog(String inputText) {
-//        Log.d("DEBUG",inputText);
-//    }
+    @Override
+    public void onFinishFilterDialog(String inputText) {
+        Log.d("DEBUG",inputText);
+    }
 }
