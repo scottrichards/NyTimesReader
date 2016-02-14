@@ -15,8 +15,8 @@ import android.widget.Spinner;
  */
 public class FilterFragment extends DialogFragment {
     private String selectedCategory = "All";
-
-
+    private ArrayAdapter categoryAdapter;
+    private Spinner categorySpinner;
 
 //    public interface FilterDialogListener {
 //        void onFinishFilterDialog(String inputText);
@@ -42,17 +42,18 @@ public class FilterFragment extends DialogFragment {
         // Create an adapter from the string array resource and use
         // android's inbuilt layout file simple_spinner_item
         // that represents the default spinner in the UI
-//        ArrayAdapter adapter = ArrayAdapter.createFromResource(getContext(), R.array.filter_categories, android.R.layout.simple_spinner_item);
-//// Set the layout to use for each dropdown item
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        Spinner categorySpinner = (Spinner)view.findViewById(R.id.category_spinner);
-//        categorySpinner.setAdapter(adapter);
+        categoryAdapter = ArrayAdapter.createFromResource(getContext(), R.array.filter_categories, android.R.layout.simple_spinner_item);
+        // Set the layout to use for each dropdown item
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner = (Spinner)view.findViewById(R.id.category_spinner);
+        categorySpinner.setAdapter(categoryAdapter);
 //        categorySpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                selectedCategory = parent.getItemAtPosition(position).toString();
 //            }
 //        });
+
         return view;
     }
 
@@ -60,5 +61,6 @@ public class FilterFragment extends DialogFragment {
 //        FilterDialogListener activity = (FilterDialogListener) getActivity();
 //        activity.onFinishFilterDialog(selectedCategory);
 //    }
+
 
 }
