@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -28,10 +30,11 @@ import java.util.ArrayList;
 
 import bitwyze.nytimesreader.Article;
 import bitwyze.nytimesreader.ArticleArrayAdapter;
+import bitwyze.nytimesreader.FilterFragment;
 import bitwyze.nytimesreader.R;
 import cz.msebera.android.httpclient.Header;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity /* implements FilterFragment.FilterDialogListener */ {
     Button btnSearch;
     EditText etQuery;
     GridView gvResults;
@@ -63,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            FragmentManager fm = getSupportFragmentManager();
+            FilterFragment filterFragment= FilterFragment.newInstance("Some Title");
+            filterFragment.show(fm, "fragment_edit_name");
             return true;
         }
 
@@ -95,12 +101,11 @@ public class MainActivity extends AppCompatActivity {
         AsyncHttpClient client = new AsyncHttpClient();
         String url = "http://api.nytimes.com/svc/search/v2/articlesearch.json";
         RequestParams params = new RequestParams();
-        params.put("api-key","87583283703463b149317caa7e61eb77:14:60732484");
+        params.put("api-key", "87583283703463b149317caa7e61eb77:14:60732484");
         params.put("page",0);
         params.put("q", query);
 
-        client.get(url,params, new JsonHttpResponseHandler()
-        {
+        client.get(url, params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         Log.d("DEBUG", response.toString());
@@ -108,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             articleResults = response.getJSONObject("response").getJSONArray("docs");
                             adapter.addAll(Article.fromJSONArray(articleResults));
-                            Log.d("DEBGU",articles.toString());
+                            Log.d("DEBGU", articles.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -122,4 +127,9 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
     }
+
+//    @Override
+//    public void onFinishFilterDialog(String inputText) {
+//        Log.d("DEBUG",inputText);
+//    }
 }

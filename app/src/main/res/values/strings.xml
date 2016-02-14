@@ -1,7 +1,21 @@
 <resources>
     <string name="app_name">NyTimesReader</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_filter">Filter</string>
     <string name="hints">Enter search query</string>
     <string name="search">Search</string>
     <string name="title_activity_article">ArticleActivity</string>
+    <string-array name="filter_categories">
+        <item>All</item>
+        <item>World</item>
+        <item>U.S.</item>
+        <item>Politics</item>
+        <item>Business</item>
+        <item>Opinion</item>
+        <item>Science</item>
+        <item>Health</item>
+        <item>Sports</item>
+        <item>Arts</item>
+        <item>Style</item>
+        <item>Food</item>
+    </string-array>
 </resources>
