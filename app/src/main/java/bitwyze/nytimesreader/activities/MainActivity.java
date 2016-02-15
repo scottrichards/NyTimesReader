@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity  implements FilterFragment.F
     GridView gvResults;
     ArticleArrayAdapter adapter;
     ArrayList<Article> articles;
+    private Date sortDate;
+    private String sortCriteria;
+    private String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,23 +101,32 @@ public class MainActivity extends AppCompatActivity  implements FilterFragment.F
     }
 
     public void onSearchArticles(View view) {
+        adapter.clear();
         String query = etQuery.getText().toString();
         AsyncHttpClient client = new AsyncHttpClient();
         String url = "http://api.nytimes.com/svc/search/v2/articlesearch.json";
         RequestParams params = new RequestParams();
         params.put("api-key", "87583283703463b149317caa7e61eb77:14:60732484");
         params.put("page",0);
-        params.put("q", query);
-
+        if (query != null && query.length()>0) {
+            params.put("q", query);
+        }
+        if (this.sortCriteria != null && this.sortCriteria.length() > 0) {
+            params.put("sort",sortCriteria);
+        }
+        if (this.category != null && this.category.length() > 0) {
+            String filteredQuery = "section_name(\"" + this.category + "\")";
+            params.put("fq",filteredQuery);
+        }
+        Log.d("MainActivity","params = " + params.toString());
         client.get(url, params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        Log.d("DEBUG", response.toString());
                         JSONArray articleResults = null;
                         try {
                             articleResults = response.getJSONObject("response").getJSONArray("docs");
+                            Log.d("MainActivity",articleResults.toString());
                             adapter.addAll(Article.fromJSONArray(articleResults));
-                            Log.d("DEBGU", articles.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -129,7 +141,10 @@ public class MainActivity extends AppCompatActivity  implements FilterFragment.F
         );
     }
 
-    public void onFinishFilterDialog(String inputText,Boolean sortNewest,Date startDate) {
-        Log.d("DEBUG",inputText);
+
+    public void onFinishFilterDialog(String category,String sortCriteria,Date startDate) {
+        this.sortCriteria = sortCriteria;
+        this.sortDate = startDate;
+        this.category = category;
     }
 }

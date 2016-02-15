@@ -22,7 +22,7 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
     private Spinner categorySpinner;
 
     public interface FilterDialogListener {
-        void onFinishFilterDialog(String inputText,Boolean sortNewest,Date startDate);
+        void onFinishFilterDialog(String inputText,String sortCriteria,Date startDate);
     }
 
     public  FilterFragment() {
@@ -56,9 +56,17 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
             @Override
             public void onClick(View v) {
                 RadioButton radioButtonNewest = (RadioButton)view.findViewById(R.id.radioButtonNewest);
+                RadioButton radioButtonOldest = (RadioButton)view.findViewById(R.id.radioButtonOldest);
                 FilterDialogListener activity = (FilterDialogListener) getActivity();
                 Date now = new Date();
-                activity.onFinishFilterDialog(selectedCategory,radioButtonNewest.isChecked(),now);
+                Boolean isNewChecked = radioButtonNewest.isChecked();
+                Boolean isOldestChecked = radioButtonOldest.isChecked();
+                String sortCriteria = "";
+                if (isNewChecked)
+                    sortCriteria = "newest";
+                if (isOldestChecked)
+                    sortCriteria = "oldest";
+                activity.onFinishFilterDialog(selectedCategory,sortCriteria,null);
                 dismiss();
             }
         });
