@@ -16,7 +16,6 @@ News desk values (Arts, Fashion & Style, Sports)
 Sort order (oldest or newest)
 Subsequent searches will have any filters applied to the search results. (1 point)
 User can tap on any article in results to view the contents in an embedded browser. (2 points)
-User can scroll down "infinitely" to continue loading more news articles. The maximum number of articles is limited by the API search. (1 point)
 
 The following **bonus** features are implemented:
 
