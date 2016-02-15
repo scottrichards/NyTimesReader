@@ -1,5 +1,6 @@
 package bitwyze.nytimesreader.fragments;
 
+import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
@@ -106,8 +107,9 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
 
     public void onSetDueDate(View view) {
         Log.d("EditTaskActivity", "onSetDueDate: ");
-//        DialogFragment picker = new DatePickerFragment();
-//        picker.show(getFragmentManager(),"date_picker");
+        DatePickerFragment picker = new DatePickerFragment();
+        android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
+        picker.show(fm,"datePicker");
     }
 
     // Handle receiving date info from DatePicker DialogFragment
