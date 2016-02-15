@@ -8,7 +8,15 @@ Time spent: 12 hours spent in total
 
 The following **required** functionality is completed:
 
-
+User can enter a search query that will display a grid of news articles using the thumbnail and headline from the New York Times Search API. (3 points)
+User can click on "settings" which allows selection of advanced search options to filter results. (3 points)
+User can configure advanced search filters such as: (points included above)
+Begin Date (using a date picker)
+News desk values (Arts, Fashion & Style, Sports)
+Sort order (oldest or newest)
+Subsequent searches will have any filters applied to the search results. (1 point)
+User can tap on any article in results to view the contents in an embedded browser. (2 points)
+User can scroll down "infinitely" to continue loading more news articles. The maximum number of articles is limited by the API search. (1 point)
 
 The following **bonus** features are implemented:
 
@@ -20,13 +28,13 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-GIF created with [LiceCap](https://github.com/scottrichards/AndroidInstagramViewer/blob/master/InstagramViewer.gif).
+GIF created with [LiceCap](https://github.com/scottrichards/NyTimesReader/blob/master/NYTimesReader.gif).
 
 ## Notes
 
 Describe any challenges encountered while building the app.
 
-I was surprised at how easy it was to add the rounded image library (although you get this functionality built into iOS). Also sepcifying a loading image was really straighforward with Picasso.
+Problems figuring out how to load the Date Picker from Dialog Fragment.
 
 ## Open-source libraries used
 
