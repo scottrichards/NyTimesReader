@@ -26,6 +26,7 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
     private ArrayAdapter categoryAdapter;
     private Spinner categorySpinner;
     private EditText dateEditText;
+    private DatePickerFragment datePicker;
 
     public interface FilterDialogListener {
         void onFinishFilterDialog(String inputText,String sortCriteria,Date startDate);
@@ -107,19 +108,17 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
 
     public void onSetDueDate(View view) {
         Log.d("EditTaskActivity", "onSetDueDate: ");
-        DatePickerFragment picker = new DatePickerFragment();
+        datePicker = new DatePickerFragment();
         android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
-        picker.show(fm,"datePicker");
+        datePicker.show(fm,"datePicker");
     }
 
     // Handle receiving date info from DatePicker DialogFragment
     public void onPickDate(Boolean setDate,String formattedDate,Date selectedDate) {
         if (setDate) {
-//            this.setDate = setDate;
-//            this.newDate = selectedDate;
-//            setSelectedDueDate(formattedDate);
+            dateEditText.setText(formattedDate);
         } else {
-            //           dueDateSpinner.setSelection(previousDueDataSpinnerSelectedItem);
+            dateEditText.setText("None");
         }
         Log.d("EditTaskActivity", "Selected Date: " + formattedDate);
     }

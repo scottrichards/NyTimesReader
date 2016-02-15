@@ -54,7 +54,7 @@ public class DatePickerFragment extends DialogFragment implements  DatePickerDia
 
     @Override
     public void onDismiss(DialogInterface dialog) {
-//        FilterFragment listener = (FilterFragment) getActivity();
+//        FilterFragment listener = (DialogFragment) getDialog();
 //        listener.onFinishEditDialog(setDate,formattedDate,selectedDate);
 
         super.onDismiss(dialog);
