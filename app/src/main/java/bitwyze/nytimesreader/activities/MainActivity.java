@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity  implements FilterFragment.F
     ArrayList<Article> articles;
     private Date sortDate;
     private String sortCriteria;
-    private String category;
+    private String category = "All";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity  implements FilterFragment.F
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             FragmentManager fm = getSupportFragmentManager();
-            FilterFragment filterFragment= FilterFragment.newInstance("Some Title");
+            FilterFragment filterFragment= FilterFragment.newInstance("Filter Settings",category,sortCriteria);
             filterFragment.show(fm, "fragment_edit_name");
             return true;
         }
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity  implements FilterFragment.F
         if (this.sortCriteria != null && this.sortCriteria.length() > 0) {
             params.put("sort",sortCriteria);
         }
-        if (this.category != null && this.category.length() > 0) {
+        if (this.category != null && this.category.length() > 0 && this.category != "All") {
             String filteredQuery = "section_name(\"" + this.category + "\")";
             params.put("fq", filteredQuery);
         }

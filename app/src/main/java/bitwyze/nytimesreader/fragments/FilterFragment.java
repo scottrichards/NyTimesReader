@@ -21,7 +21,7 @@ import bitwyze.nytimesreader.R;
 /**
  * Created by srichard on 2/13/16.
  */
-public class FilterFragment extends DialogFragment implements AdapterView.OnItemSelectedListener {
+public class FilterFragment extends DialogFragment implements AdapterView.OnItemSelectedListener, DatePickerFragment.DatePickerDialogListener {
     private String selectedCategory = "All";
     private ArrayAdapter categoryAdapter;
     private Spinner categorySpinner;
@@ -36,19 +36,34 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
 
     }
 
-    public static FilterFragment newInstance(String title) {
+    public static FilterFragment newInstance(String title,String selectedCategory,String sortCriteria) {
         FilterFragment frag = new FilterFragment();
         Bundle args = new Bundle();
         args.putString("title", title);
         frag.setArguments(args);
+        args.putString("category", selectedCategory);
+        args.putString("sortCriteria",sortCriteria);
         return frag;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         final View view = inflater.inflate(R.layout.fragment_filter, container);
+
+        selectedCategory = getArguments().getString("category");
+        String sortCritera = getArguments().getString("sortCriteria");
+        if (sortCritera != null) {
+            if (sortCritera == "oldest") {
+                RadioButton radioButtonOldest = (RadioButton)view.findViewById(R.id.radioButtonOldest);
+                radioButtonOldest.setChecked(true);
+            }
+            if (sortCritera == "newest") {
+                RadioButton radioButtonNewest = (RadioButton) view.findViewById(R.id.radioButtonNewest);
+                radioButtonNewest.setChecked(true);
+            }
+        }
+
         // Create an adapter from the string array resource and use
         // android's inbuilt layout file simple_spinner_item
         // that represents the default spinner in the UI
@@ -109,7 +124,7 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
     public void onSetDueDate(View view) {
         Log.d("EditTaskActivity", "onSetDueDate: ");
         datePicker = new DatePickerFragment();
-        android.support.v4.app.FragmentManager fm = getActivity().getSupportFragmentManager();
+        FragmentManager fm = getActivity().getSupportFragmentManager();
         datePicker.show(fm,"datePicker");
     }
 

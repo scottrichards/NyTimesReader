@@ -22,7 +22,7 @@ public class DatePickerFragment extends DialogFragment implements  DatePickerDia
     private Boolean setDate = false;
     private Date selectedDate;
 
-    public interface EditNameDialogListener {
+    public interface DatePickerDialogListener {
         void onPickDate(Boolean setDate,String formattedDate,Date selectedDate);
     }
 
@@ -54,9 +54,8 @@ public class DatePickerFragment extends DialogFragment implements  DatePickerDia
 
     @Override
     public void onDismiss(DialogInterface dialog) {
-//        FilterFragment listener = (DialogFragment) getDialog();
-//        listener.onFinishEditDialog(setDate,formattedDate,selectedDate);
-
+        DatePickerDialogListener listener = (DatePickerDialogListener) getActivity();
+        listener.onPickDate(setDate, formattedDate, selectedDate);
         super.onDismiss(dialog);
     }
 
