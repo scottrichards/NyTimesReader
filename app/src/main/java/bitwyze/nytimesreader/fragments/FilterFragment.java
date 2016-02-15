@@ -51,18 +51,7 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_filter, container);
 
-        selectedCategory = getArguments().getString("category");
-        String sortCritera = getArguments().getString("sortCriteria");
-        if (sortCritera != null) {
-            if (sortCritera == "oldest") {
-                RadioButton radioButtonOldest = (RadioButton)view.findViewById(R.id.radioButtonOldest);
-                radioButtonOldest.setChecked(true);
-            }
-            if (sortCritera == "newest") {
-                RadioButton radioButtonNewest = (RadioButton) view.findViewById(R.id.radioButtonNewest);
-                radioButtonNewest.setChecked(true);
-            }
-        }
+
 
         // Create an adapter from the string array resource and use
         // android's inbuilt layout file simple_spinner_item
@@ -80,6 +69,21 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
                 onSetDueDate(v);
             }
         });
+        selectedCategory = getArguments().getString("category");
+        setCategorySpinner(selectedCategory);
+
+        String sortCritera = getArguments().getString("sortCriteria");
+        if (sortCritera != null) {
+            if (sortCritera == "oldest") {
+                RadioButton radioButtonOldest = (RadioButton)view.findViewById(R.id.radioButtonOldest);
+                radioButtonOldest.setChecked(true);
+            }
+            if (sortCritera == "newest") {
+                RadioButton radioButtonNewest = (RadioButton) view.findViewById(R.id.radioButtonNewest);
+                radioButtonNewest.setChecked(true);
+            }
+        }
+
         Button onOkBtn = (Button)view.findViewById(R.id.filterOK);
         onOkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,6 +113,14 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
         });
 
         return view;
+    }
+
+    // set the spinner selection to the value in the adapter if it exists
+    private void setCategorySpinner(String value)
+    {
+        if (value != null) {
+            categorySpinner.setSelection(categoryAdapter.getPosition(value));
+        }
     }
 
     public void onItemSelected(AdapterView<?> parent, View view,
