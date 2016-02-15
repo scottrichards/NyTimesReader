@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.Spinner;
+
+import java.util.Date;
 
 /**
  * Created by srichard on 2/13/16.
@@ -19,7 +22,7 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
     private Spinner categorySpinner;
 
     public interface FilterDialogListener {
-        void onFinishFilterDialog(String inputText);
+        void onFinishFilterDialog(String inputText,Boolean sortNewest,Date startDate);
     }
 
     public  FilterFragment() {
@@ -38,7 +41,7 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_filter, container);
+        final View view = inflater.inflate(R.layout.fragment_filter, container);
         // Create an adapter from the string array resource and use
         // android's inbuilt layout file simple_spinner_item
         // that represents the default spinner in the UI
@@ -52,8 +55,18 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
         onOkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RadioButton radioButtonNewest = (RadioButton)view.findViewById(R.id.radioButtonNewest);
                 FilterDialogListener activity = (FilterDialogListener) getActivity();
-                activity.onFinishFilterDialog(selectedCategory);
+                Date now = new Date();
+                activity.onFinishFilterDialog(selectedCategory,radioButtonNewest.isChecked(),now);
+                dismiss();
+            }
+        });
+
+        Button onCancelBtn = (Button)view.findViewById(R.id.filterCancel);
+        onCancelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 dismiss();
             }
         });

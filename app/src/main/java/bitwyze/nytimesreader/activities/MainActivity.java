@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 
 import bitwyze.nytimesreader.Article;
 import bitwyze.nytimesreader.ArticleArrayAdapter;
@@ -128,8 +129,7 @@ public class MainActivity extends AppCompatActivity  implements FilterFragment.F
         );
     }
 
-    @Override
-    public void onFinishFilterDialog(String inputText) {
+    public void onFinishFilterDialog(String inputText,Boolean sortNewest,Date startDate) {
         Log.d("DEBUG",inputText);
     }
 }

@@ -37,14 +37,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Oldest"
-            android:id="@+id/radioButton"
+            android:id="@+id/radioButtonOldest"
             android:checked="false" />
 
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Newest"
-            android:id="@+id/radioButton2"
+            android:id="@+id/radioButtonNewest"
             android:checked="false" />
 
     </RadioGroup>
@@ -70,5 +70,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
-        android:id="@+id/filterCancel"/>
+        android:id="@+id/filterCancel"
+        />
 </LinearLayout>
