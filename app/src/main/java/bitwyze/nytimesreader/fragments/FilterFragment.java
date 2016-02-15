@@ -1,17 +1,21 @@
-package bitwyze.nytimesreader;
+package bitwyze.nytimesreader.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
 import java.util.Date;
+
+import bitwyze.nytimesreader.R;
 
 /**
  * Created by srichard on 2/13/16.
@@ -20,6 +24,7 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
     private String selectedCategory = "All";
     private ArrayAdapter categoryAdapter;
     private Spinner categorySpinner;
+    private EditText dateEditText;
 
     public interface FilterDialogListener {
         void onFinishFilterDialog(String inputText,String sortCriteria,Date startDate);
@@ -51,6 +56,13 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
         categorySpinner = (Spinner)view.findViewById(R.id.category_spinner);
         categorySpinner.setAdapter(categoryAdapter);
         categorySpinner.setOnItemSelectedListener(this);
+        dateEditText = (EditText)view.findViewById(R.id.dateEditText);
+        dateEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSetDueDate(v);
+            }
+        });
         Button onOkBtn = (Button)view.findViewById(R.id.filterOK);
         onOkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,6 +104,22 @@ public class FilterFragment extends DialogFragment implements AdapterView.OnItem
     }
 
 
+    public void onSetDueDate(View view) {
+        Log.d("EditTaskActivity", "onSetDueDate: ");
+//        DialogFragment picker = new DatePickerFragment();
+//        picker.show(getFragmentManager(),"date_picker");
+    }
 
+    // Handle receiving date info from DatePicker DialogFragment
+    public void onPickDate(Boolean setDate,String formattedDate,Date selectedDate) {
+        if (setDate) {
+//            this.setDate = setDate;
+//            this.newDate = selectedDate;
+//            setSelectedDueDate(formattedDate);
+        } else {
+            //           dueDateSpinner.setSelection(previousDueDataSpinnerSelectedItem);
+        }
+        Log.d("EditTaskActivity", "Selected Date: " + formattedDate);
+    }
 
 }

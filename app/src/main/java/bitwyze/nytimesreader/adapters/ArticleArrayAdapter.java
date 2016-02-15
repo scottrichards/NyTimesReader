@@ -1,4 +1,4 @@
-package bitwyze.nytimesreader;
+package bitwyze.nytimesreader.adapters;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -12,6 +12,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import bitwyze.nytimesreader.models.Article;
+import bitwyze.nytimesreader.R;
 
 /**
  * Created by srichard on 2/9/16.

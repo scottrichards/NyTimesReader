@@ -2,9 +2,6 @@ package bitwyze.nytimesreader.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,13 +22,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Filter;
 
-import bitwyze.nytimesreader.Article;
-import bitwyze.nytimesreader.ArticleArrayAdapter;
-import bitwyze.nytimesreader.FilterFragment;
+import bitwyze.nytimesreader.models.Article;
+import bitwyze.nytimesreader.adapters.ArticleArrayAdapter;
+import bitwyze.nytimesreader.fragments.FilterFragment;
 import bitwyze.nytimesreader.R;
 import cz.msebera.android.httpclient.Header;
 
@@ -116,16 +113,16 @@ public class MainActivity extends AppCompatActivity  implements FilterFragment.F
         }
         if (this.category != null && this.category.length() > 0) {
             String filteredQuery = "section_name(\"" + this.category + "\")";
-            params.put("fq",filteredQuery);
+            params.put("fq", filteredQuery);
         }
-        Log.d("MainActivity","params = " + params.toString());
+        Log.d("MainActivity", "params = " + params.toString());
         client.get(url, params, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         JSONArray articleResults = null;
                         try {
                             articleResults = response.getJSONObject("response").getJSONArray("docs");
-                            Log.d("MainActivity",articleResults.toString());
+                            Log.d("MainActivity", articleResults.toString());
                             adapter.addAll(Article.fromJSONArray(articleResults));
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -147,4 +144,6 @@ public class MainActivity extends AppCompatActivity  implements FilterFragment.F
         this.sortDate = startDate;
         this.category = category;
     }
+
+
 }
